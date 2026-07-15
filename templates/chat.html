@@ -1,0 +1,39 @@
+{% comment %} <input id="question" placeholder="Ask a question">
+<input type="hidden" id="csrf" value="{{ csrf_token }}">
+
+<button onclick="ask()">Ask</button>
+
+<div id="answer"></div>
+
+<script src="/static/js/chat.js"></script> {% endcomment %}
+
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>KnowBase AI | Chat</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body class="dark">
+
+<header class="top-bar">
+  <h2>KnowBase AI</h2>
+  <button onclick="toggleTheme()" >🌙</button>
+</header>
+
+<div id="chat-box" class="chat-box"></div>
+
+<div class="typing" id="typing">🤖AI is typing...</div>
+
+<div class="input-area">
+  <input id="question" placeholder ="Ask something..." />
+  <button onclick="ask()">Send</button>
+</div>
+
+<input type="hidden" id="csrf" value="{{ csrf_token }}">
+
+<script src="{% static 'js/chat.js' %}"></script>
+</body>
+</html>

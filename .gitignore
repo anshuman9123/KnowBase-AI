@@ -1,0 +1,26 @@
+
+
+# Environment
+.env
+
+# Virtual Environment
+venv/
+
+# Python
+__pycache__/
+*.pyc
+
+# Database
+db.sqlite3
+
+# Static
+staticfiles/
+
+# macOS
+.DS_Store
+
+# Uploaded files
+media/
+
+# FAISS Vector Store
+data/vector_store/

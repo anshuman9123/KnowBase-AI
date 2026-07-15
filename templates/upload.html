@@ -1,0 +1,25 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>KnowBase AI | Upload</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body class="center-page">
+
+  <div class="card">
+    <h1>KnowBase AI</h1>
+    <p class="subtitle">Enterprise Knowledge Assistant</p>
+
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input type="file" name="file" required class="file-input">
+      <button type="submit" class="primary-btn">Upload & Index</button>
+    </form>
+  </div>
+  <button class="dark-toggle" onclick="toggleDark()">🌙</button>
+  <script src="{% static 'js/theme.js' %}"></script>
+</body>
+</html> 
+

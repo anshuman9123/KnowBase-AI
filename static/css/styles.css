@@ -1,0 +1,233 @@
+/* =========================
+   GLOBAL RESET & VARIABLES
+========================= */
+
+:root {
+  --bg: #f4f6fb;
+  --card-bg: #ffffff;
+  --text: #1f2937;
+  --subtext: #6b7280;
+  --primary: #4f46e5;
+  --user-msg: #4f46e5;
+  --ai-msg: #e5e7eb;
+  --border: #e5e7eb;
+}
+
+/* 🌙 Dark Mode */
+body.dark {
+  --bg: #0f172a;
+  --card-bg: #020617;
+  --text: #e5e7eb;
+  --subtext: #94a3b8;
+  --primary: #6366f1;
+  --user-msg: #6366f1;
+  --ai-msg: #1e293b;
+  --border: #1e293b;
+}
+
+/* =========================
+   BASE
+========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* =========================
+   CENTER PAGE (UPLOAD)
+========================= */
+
+.center-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  background: var(--card-bg);
+  padding: 2.5rem;
+  width: 360px;
+  border-radius: 14px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+
+.card h1 {
+  margin-bottom: 0.3rem;
+}
+
+.subtitle {
+  color: var(--subtext);
+  margin-bottom: 1.5rem;
+}
+
+.file-input {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.primary-btn {
+  width: 100%;
+  padding: 0.7rem;
+  border: none;
+  background: var(--primary);
+  color: white;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.primary-btn:hover {
+  opacity: 0.9;
+}
+
+/* =========================
+   CHAT PAGE LAYOUT
+========================= */
+
+.chat-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* TOP BAR */
+.top-bar {
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 1.5rem;
+}
+
+.top-bar h2 {
+  font-size: 1.2rem;
+}
+
+.top-bar span {
+  font-size: 0.85rem;
+  color: var(--subtext);
+}
+
+/* CHAT BOX */
+.chat-box {
+  flex: 1;
+  padding: 1.2rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+/* =========================
+   CHAT BUBBLES
+========================= */
+
+.message {
+  max-width: 70%;
+  padding: 0.7rem 1rem;
+  border-radius: 14px;
+  line-height: 1.4;
+  font-size: 0.95rem;
+}
+
+.message.user {
+  align-self: flex-end;
+  background: var(--user-msg);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.message.ai {
+  align-self: flex-start;
+  background: var(--ai-msg);
+  color: var(--text);
+  border-bottom-left-radius: 4px;
+}
+
+/* =========================
+   TYPING INDICATOR
+========================= */
+
+.typing {
+  display: inline-flex;
+  gap: 4px;
+  padding: 0.5rem 0.8rem;
+}
+
+.typing span {
+  width: 6px;
+  height: 6px;
+  background: var(--subtext);
+  border-radius: 50%;
+  animation: blink 1.4s infinite both;
+}
+
+.typing span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.typing span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0% { opacity: 0.2; }
+  20% { opacity: 1; }
+  100% { opacity: 0.2; }
+}
+
+/* =========================
+   INPUT AREA
+========================= */
+
+.input-area {
+  display: flex;
+  padding: 1rem;
+  border-top: 1px solid var(--border);
+  background: var(--card-bg);
+}
+
+.input-area input {
+  flex: 1;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  outline: none;
+}
+
+.input-area button {
+  margin-left: 0.6rem;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+}
+
+/* =========================
+   DARK MODE TOGGLE BUTTON
+========================= */
+
+.dark-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
