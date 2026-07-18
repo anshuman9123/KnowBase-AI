@@ -36,7 +36,9 @@ def upload_document(request):
             print("Reached save_vectors")
             save_vectors(docs, embeddings)
 
-            return render(request, 'chat.html')
+            return render(request, 'chat.html', {
+                 "document_name": file.name
+})
 
         except Exception as e:
             print("UPLOAD ERROR:", str(e))

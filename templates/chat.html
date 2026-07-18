@@ -1,4 +1,4 @@
-{% comment %} <input id="question" placeholder="Ask a question">
+<!-- {% comment %} <input id="question" placeholder="Ask a question">
 <input type="hidden" id="csrf" value="{{ csrf_token }}">
 
 <button onclick="ask()">Ask</button>
@@ -35,5 +35,98 @@
 <input type="hidden" id="csrf" value="{{ csrf_token }}">
 
 <script src="{% static 'js/chat.js' %}"></script>
+</body>
+</html> -->
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KnowBase AI | Ask</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body class="chat-page">
+
+  <div class="index-field index-field--faint" id="indexField" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <span class="wordmark-sm">KnowBase <span>AI</span></span>
+      <div class="doc-chip">
+        <span class="doc-chip-dot"></span>
+        <span class="doc-chip-name">{{ document_name|default:"Q3_Financial_Report.pdf" }}</span>
+        <span class="doc-chip-status">Indexed</span>
+      </div>
+    </div>
+    <a href="{% url 'upload' %}" class="topbar-link">+ New document</a>
+  </header>
+
+  <main class="chat-scroll" id="chatScroll">
+    <div class="chat-inner">
+
+      <div class="empty-state" id="emptyState">
+        <div class="empty-icon">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="21" stroke="currentColor" stroke-width="1.6" stroke-dasharray="2 5"/>
+            <path d="M17 22h14M17 27h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <circle cx="24" cy="24" r="4.5" stroke="currentColor" stroke-width="1.6"/>
+          </svg>
+        </div>
+        <h2 class="empty-title">Ask anything about this document</h2>
+        <p class="empty-sub">Every answer is grounded in the source — with citations you can verify.</p>
+
+        <div class="suggestions" id="suggestions">
+          <button type="button" class="suggestion-chip" data-prompt="Summarize this document in five bullet points">Summarize this document</button>
+          <button type="button" class="suggestion-chip" data-prompt="What are the key risks mentioned in this document?">Key risks mentioned</button>
+          <button type="button" class="suggestion-chip" data-prompt="List all important dates and deadlines">Important dates &amp; deadlines</button>
+        </div>
+      </div>
+
+      <div class="messages" id="messages"></div>
+
+      <div class="thinking" id="thinking" hidden>
+        <div class="thinking-avatar">
+          <span class="pulse-dot"></span>
+        </div>
+        <div class="thinking-body">
+          <p class="thinking-label" id="thinkingLabel">Searching document…</p>
+          <div class="thinking-bars">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <form class="composer" id="composerForm">
+    <div class="composer-inner">
+      <textarea
+        id="queryInput"
+        class="composer-input"
+        placeholder="Ask a question about this document…"
+        rows="1"
+        maxlength="1000"></textarea>
+      <button type="submit" class="composer-send" id="sendBtn" disabled aria-label="Send question">
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+    <p class="composer-hint">KnowBase AI answers only from your uploaded document — it will say so if it can't find something.</p>
+  </form>
+
+  <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.6"/><path d="M12 2.5v2.4M12 19.1v2.4M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.9 19.1l1.7-1.7M17.4 6.6l1.7-1.7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+  </button>
+
+  <script src="{% static 'js/theme.js' %}"></script>
+  <script src="{% static 'js/chat.js' %}"></script>
 </body>
 </html>

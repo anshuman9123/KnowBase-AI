@@ -1,25 +1,87 @@
-
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en" data-theme="dark">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KnowBase AI | Upload</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body class="center-page">
 
-  <div class="card">
-    <h1>KnowBase AI</h1>
-    <p class="subtitle">Enterprise Knowledge Assistant</p>
+  <div class="index-field" id="indexField" aria-hidden="true"></div>
 
-    <form method="post" enctype="multipart/form-data">
+  <main class="card">
+    <p class="eyebrow">Enterprise Knowledge Assistant</p>
+    <h1 class="wordmark">KnowBase <span>AI</span></h1>
+    <p class="subtitle">Upload a document. Ask it anything. Get answers grounded in your own source.</p>
+
+    <form method="post" enctype="multipart/form-data" id="uploadForm">
       {% csrf_token %}
-      <input type="file" name="file" required class="file-input">
-      <button type="submit" class="primary-btn">Upload & Index</button>
+
+      <label for="fileInput" class="dropzone" id="dropzone">
+        <input type="file" name="file" id="fileInput" accept=".pdf" required class="file-input">
+
+        <div class="dz-idle" id="dzIdle">
+          <svg class="dz-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 6h14l8 8v26a2 2 0 0 1-2 2H14a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M28 6v8h8" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M18 26h12M18 31h12M18 21h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <p class="dz-title">Drop your PDF here</p>
+          <p class="dz-hint">or click to browse · PDF up to 50MB</p>
+        </div>
+
+        <div class="dz-file" id="dzFile">
+          <div class="dz-file-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 2h9l5 5v14a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M15 2v5h5" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
+          </div>
+          <div class="dz-file-meta">
+            <p class="dz-file-name" id="fileName">document.pdf</p>
+            <p class="dz-file-size" id="fileSize">—</p>
+          </div>
+          <button type="button" class="dz-file-remove" id="removeFile" aria-label="Remove file">✕</button>
+          <div class="scanline"></div>
+        </div>
+      </label>
+
+      <button type="submit" class="primary-btn" id="submitBtn" disabled>
+        <span class="btn-label">Upload &amp; Index</span>
+        <svg class="btn-arrow" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
     </form>
-  </div>
-  <button class="dark-toggle" onclick="toggleDark()">🌙</button>
+
+    <div class="stat-row">
+      <div class="stat">
+        <span class="stat-value">2,400+</span>
+        <span class="stat-label">Pages indexed</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-value">&lt;2s</span>
+        <span class="stat-label">Avg. response</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-value">Source-grounded</span>
+        <span class="stat-label">Every answer</span>
+      </div>
+    </div>
+  </main>
+
+  <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.6"/><path d="M12 2.5v2.4M12 19.1v2.4M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.9 19.1l1.7-1.7M17.4 6.6l1.7-1.7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+  </button>
+
   <script src="{% static 'js/theme.js' %}"></script>
 </body>
-</html> 
-
+</html>
